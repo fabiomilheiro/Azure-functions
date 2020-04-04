@@ -23,7 +23,7 @@ namespace Azure_functions
         }
 
         [FunctionName("Greet")]
-        public async Task<IActionResult> Run(
+        public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
             ILogger log)
         {

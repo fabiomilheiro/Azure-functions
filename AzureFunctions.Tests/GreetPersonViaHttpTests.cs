@@ -29,7 +29,7 @@ namespace AzureFunctions.Tests
         [InlineData((string)null)]
         [InlineData("")]
         [InlineData("Not a number")]
-        public async Task Run_QueryStringValueNotSetCorrectly_ReturnsBadRequest(string id)
+        public void Run_QueryStringValueNotSetCorrectly_ReturnsBadRequest(string id)
         {
             var request = new TestHttpRequest();
 
@@ -38,7 +38,7 @@ namespace AzureFunctions.Tests
                 request.QueryDictionary.Add("id", id);
             }
 
-            var result = await this.sut.Run(new TestHttpRequest(), this.logger);
+            var result = this.sut.Run(new TestHttpRequest(), this.logger);
 
             result
                 .Should()
@@ -48,14 +48,14 @@ namespace AzureFunctions.Tests
         }
 
         [Fact]
-        public async Task Run_PersonNotFound_ReturnsNotFound()
+        public void Run_PersonNotFound_ReturnsNotFound()
         {
             var request = new TestHttpRequest
             {
                 QueryDictionary = { ["id"] = "999999" }
             };
 
-            var result = await this.sut.Run(request, this.logger);
+            var result = this.sut.Run(request, this.logger);
 
             result
                 .Should()
@@ -65,14 +65,14 @@ namespace AzureFunctions.Tests
         }
 
         [Fact]
-        public async Task Run_PersonFound_ReturnsGreeting()
+        public void Run_PersonFound_ReturnsGreeting()
         {
             var request = new TestHttpRequest
             {
                 QueryDictionary = { ["id"] = "2" }
             };
 
-            var result = await this.sut.Run(request, this.logger);
+            var result = this.sut.Run(request, this.logger);
 
             result
                 .Should()
